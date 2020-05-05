@@ -1,0 +1,76 @@
+<%- include('./_header', {params: params}); %>
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+<%- include('./_page_header'); %>
+<div class="app-body">
+    <%- include('./_side_menu') %>
+    <main class="main">
+        <!-- Breadcrumb-->
+        <ol class="breadcrumb">
+        </ol>
+        <div class="container-fluid">
+            <div class="animated fadeIn">
+                <!-- /.row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>プロフィール</strong>更新
+                            </div>
+                            <% if (error.length > 0) { %>
+                                <div class="alert alert-danger"><%- error %></div>
+                            <% } %>
+
+                            <% if (success.length > 0) { %>
+                                <div class="alert alert-success"><%- success %></div>
+                            <% } %>
+                            <div class="card-body">
+                                <form class="form-horizontal" action="" role="form" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="appendedInputButtons">画像</label>
+                                        <div class="controls">
+                                            <div class="input-group">
+                                                <input id="imageFile" type="file" name="imageFile" accept="image/*">
+                                                <span class="input-group-append">
+                                                    <div style="display:inline-block;min-width:200px; min-height:200px; border:5px dashed #eee; padding:10px;">
+                                                        <img id="preview" src="/users/profiles/images" style="max-width: 200px; max-height: 200px">
+                                                    </div>
+                                                 </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <label for="name">名前</label>
+                                                <input class="form-control" id="name" name="name"  type="text" value="<%= params.name %>" placeholder="名前を入力して下さい。">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary" type="submit">
+                                        <i class="fa fa-dot-circle-o"></i> 更新
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-->
+                </div>
+                <!-- /.row-->
+            </div>
+        </div>
+    </main>
+</div>
+<!-- CoreUI and necessary plugins-->
+<%- include('./_coreui_plugin') %>
+<%- include('./_common_logic') %>
+<script type="text/javascript">
+    $('#imageFile').on('change', function (e) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    });
+</script>
+</body>
+<%- include('./_footer') %>

@@ -1,0 +1,15 @@
+<%- include('./_header', {params: params}); %>
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+<%- include('./_page_header'); %>
+<div class="app-body">
+    <%- include('./_side_menu') %>
+</div>
+<!-- CoreUI and necessary plugins-->
+<%- include('./_coreui_plugin') %>
+<%- include('./_common_logic') %>
+<!--    <script src="js/main.js"></script>-->
+<script type="text/javascript" src="/assets/vendors/chart.js/js/Chart.min.js"></script>
+<script type="text/javascript" src="/assets/vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+<script type="text/javascript" src="/assets/js/main.js"></script>
+</body>
+<%- include('./_footer') %>

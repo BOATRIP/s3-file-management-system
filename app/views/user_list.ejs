@@ -1,0 +1,121 @@
+<%- include('./_header', {params: params}); %>
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+<%- include('./_page_header'); %>
+<div class="app-body">
+    <%- include('./_side_menu') %>
+    <main class="main">
+        <!-- Breadcrumb-->
+        <ol class="breadcrumb">
+        </ol>
+        <div class="container-fluid">
+            <div class="animated fadeIn">
+                <% if (error.length > 0) { %>
+                    <div class="alert alert-danger"><%- error %></div>
+                <% } %>
+
+                <% if (success.length > 0) { %>
+                    <div class="alert alert-success"><%- success %></div>
+                <% } %>
+                <!-- /.row-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>ログインID</th>
+                                        <th>姓名</th>
+                                        <th>権限</th>
+                                        <th>ステータス</th>
+                                        <th>削除フラグ</th>
+                                        <th>アクション</th>
+                                    </tr>
+                                    </thead>
+                                    <tr>
+                                        <% params.users.forEach(user => { %>
+                                            <td><%= user.login_id %></td>
+                                            <td><%= user.name %></td>
+                                            <td><%= user.role %></td>
+                                            <td>
+                                                <span class="badge badge-success"><%= user.status %></span>
+                                            </td>
+                                            <td><%= user.is_deleted %></td>
+                                            <td>
+                                                <a class="btn btn-success"
+                                                   href="/supports/histories/currents/<%= user.login_id %>">
+                                                    <i class="fa fa-search-plus"></i>
+                                                </a>
+                                                <% if (params.role === 'admin') { %>
+                                                    <a class="btn btn-info" href="#">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a class="btn btn-danger">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                <% } %>
+                                            </td>
+                                    </tr>
+                                    <% }) %>
+                                    </tbody>
+                                </table>
+                                <nav>
+                                    <ul class="pagination">
+                                        <%
+                                        const indexes = [...Array(params.page.maxPage).keys()];
+                                        indexes.forEach(index => {
+                                            const page = index + 1;
+                                        %>
+                                        <li class="page-item <%= params.page.currentPage === page ? 'active' : '' %>">
+                                            <a class="page-link"
+                                               href="/users?page=<%= page %>"><%= page %></a>
+                                        </li>
+                                        <% }) %>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-->
+                </div>
+                <!-- /.row-->
+            </div>
+        </div>
+    </main>
+</div>
+<!-- CoreUI and necessary plugins-->
+<%- include('./_coreui_plugin') %>
+<%- include('./_common_logic') %>
+<script type="text/javascript">
+    $('.btn.btn-danger').on('click', function () {
+        const loginId = $(this).parent().parent()[0].children[0].innerText
+
+        const params = {
+            loginId: loginId
+        };
+
+        $.ajax({
+            url: `/users/deletions`,
+            method: "DELETE",
+            dataType: 'json',
+            data: JSON.stringify(params),
+            cache: false,
+            contentType: 'application/json',
+            success: (json) => {   // 200 OK時
+                // JSON Arrayの先頭が成功フラグ、失敗の場合2番目がエラーメッセージ
+                if (json.code !== 200) {    // サーバが失敗を返した場合
+                    console.error("Transaction error. " + json.message);
+                    alert('削除に失敗しました。');
+                    return;
+                }
+                alert('削除に成功しました。');
+                location.reload();
+            },
+            error: () => {
+                console.error("Server Error. Pleasy try again later.");
+            }
+        });
+    });
+</script>
+</body>
+<%- include('./_footer') %>

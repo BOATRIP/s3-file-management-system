@@ -1,0 +1,41 @@
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <% if(params.role === 'admin') { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">
+                        <i class="nav-icon icon-speedometer"></i> Dashboard
+                    </a>
+                </li>
+            <% } %>
+            <li class="nav-title">メニュー</li>
+            <% if(params.role === 'admin') { %>
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#">
+                        <i class="nav-icon icon-people"></i> ユーザー管理</a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users">
+                                <i class="nav-icon"></i> ユーザー一覧</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/registrations">
+                                <i class="nav-icon"></i> ユーザー作成</a>
+                        </li>
+                    </ul>
+                </li>
+            <% } %>
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="nav-icon icon-phone"></i> 音声ファイル</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/s3files">
+                            <i class="nav-icon"></i> ファイル一覧</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+</div>

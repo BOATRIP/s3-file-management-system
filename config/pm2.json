@@ -1,0 +1,18 @@
+{
+  "script": "./launch.js",
+  "name": "cti-management-system",
+  "instances": 1,
+  "error_file": "pm2/errfile.log",
+  "out_file": "pm2/outfile.log",
+  "pid_file": "pm2/pidfile.pid",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "env_production": {
+    "NODE_ENV": "production"
+  },
+  "env_staging": {
+    "NODE_ENV": "staging",
+    "TEST": true
+  }
+}

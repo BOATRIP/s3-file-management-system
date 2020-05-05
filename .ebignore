@@ -1,0 +1,19 @@
+!empty
+#.env
+/vendor
+/node_modules
+typings/
+.idea/
+.vagrant/
+.DS_Store
+Thumbs.db
+/public/data/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+/lambda
+
+.gitignore

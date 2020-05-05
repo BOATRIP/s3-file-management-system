@@ -1,0 +1,22 @@
+{
+  "appenders":
+  [
+    {
+      "type":"console",
+      "category":"console"
+    },
+    {
+      "category":"system",
+      "type": "dateFile",
+      "filename": "./logs/system/access",
+      "alwaysIncludePattern": true,
+      "pattern": "-yyyy-MM-dd-hh.log"
+    }
+  ],
+  "replaceConsole": true,
+  "levels":
+  {
+    "console":"ALL",
+    "system":"ALL"
+  }
+}

@@ -1,0 +1,45 @@
+<%- include('./_header', {params: params}); %>
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+<%- include('./_page_header'); %>
+<div class="app-body">
+    <%- include('./_side_menu') %>
+    <main class="main">
+        <!-- Breadcrumb-->
+        <ol class="breadcrumb">
+        </ol>
+        <div class="container-fluid">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-align-justify"></i> 一覧
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-responsive-sm">
+                                    <thead>
+                                    <tr>
+                                        <th>DL</th>
+                                        <th>種類</th>
+                                        <th>名前</th>
+                                        <th>最終更新日時</th>
+                                        <th>サイズ</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="fileList">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<!-- CoreUI and necessary plugins-->
+<%- include('./_coreui_plugin') %>
+<%- include('./_common_logic') %>
+<script type="text/javascript" src="/assets/js/s3-file/index.js"></script>
+</body>
+<%- include('./_footer') %>
